@@ -1,0 +1,127 @@
+/* ============================================================
+   The Grit Institute — Redesign layer (loaded after Webflow CSS)
+   Cleaner · calmer · faster. Overrides defaults only; fully reversible.
+   Brand: dark-teal #013135 · teal #53717e · orange #dc4d2f
+   ============================================================ */
+
+:root{
+  --gi-teal-dark:#013135;
+  --gi-teal:#53717e;
+  --gi-orange:#dc4d2f;
+  --gi-orange-light:#fa7151;
+  --gi-off-white:#f6f6f6;
+  --gi-ease:cubic-bezier(.22,.61,.36,1);
+}
+
+/* --- Instant paint: never gate content on the JS reveal --- */
+.page-wrapper{opacity:1 !important;}
+
+/* smoother in-page scrolling */
+html{scroll-behavior:smooth;}
+
+/* ============================================================
+   NAVIGATION — frosted, minimal, confident
+   ============================================================ */
+.navigation{
+  background-color:rgba(1,49,53,.45) !important;
+  -webkit-backdrop-filter:saturate(140%) blur(14px);
+  backdrop-filter:saturate(140%) blur(14px);
+  border-bottom:1px solid rgba(255,255,255,.06);
+  padding-left:2.5rem !important;padding-right:2.5rem !important;
+  transition:background-color .4s var(--gi-ease),border-color .4s var(--gi-ease),box-shadow .4s var(--gi-ease);
+}
+.navigation.is-scrolled{
+  background-color:rgba(1,49,53,.94) !important;
+  border-bottom-color:rgba(255,255,255,.10);
+  box-shadow:0 10px 30px -12px rgba(0,0,0,.45);
+}
+.navbar{background:transparent !important;}
+.nav_bg{display:none !important;}            /* remove the heavy dark overlay block */
+
+/* logo */
+.top-nav_logo{transition:opacity .3s var(--gi-ease);}
+.nav_brand:hover .top-nav_logo{opacity:.82;}
+
+/* item rhythm */
+.nav-menu_list-centered{gap:.25rem;}
+.nav-menu_list-item{display:flex;align-items:center;}
+
+/* links + dropdown toggles */
+.nav_link,
+.nav-dropdown-toggle{
+  position:relative;
+  font-family:var(--_typeface---body-text-dm-sans,'DM Sans',sans-serif);
+  font-size:.92rem;font-weight:500;letter-spacing:.01em;
+  color:rgba(255,255,255,.86) !important;
+  padding:.55rem .85rem !important;border-radius:8px;
+  transition:color .25s var(--gi-ease);
+  cursor:pointer;
+}
+.nav_link:hover,.nav-dropdown-toggle:hover,
+.nav_link.w--current{color:#fff !important;}
+
+/* animated underline */
+.nav_link::after,
+.nav-dropdown-toggle::after{
+  content:"";position:absolute;left:.85rem;right:.85rem;bottom:.34rem;height:1.5px;
+  background:var(--gi-orange-light);transform:scaleX(0);transform-origin:left;
+  transition:transform .3s var(--gi-ease);border-radius:2px;
+}
+.nav_link:hover::after,
+.nav_link.w--current::after,
+.nav-dropdown:hover .nav-dropdown-toggle::after,
+.nav-dropdown-toggle.gi-active::after{transform:scaleX(1);}
+
+/* chevron */
+.nav-dropdown{display:flex;align-items:center;}
+.nav-dropdown-toggle{display:flex;align-items:center;gap:.4rem;}
+.dropdown-icon{font-size:.55rem !important;opacity:.7;margin:0 !important;
+  transition:transform .3s var(--gi-ease);}
+.nav-dropdown:hover .dropdown-icon{transform:rotate(180deg);}
+
+/* desktop: hover-to-open, soft fade */
+@media screen and (min-width:992px){
+  .nav-dropdown .dropdown-navigation.w-dropdown-list{
+    display:block !important;position:absolute;top:100%;left:50%;
+    transform:translate(-50%,8px);min-width:232px;margin-top:.4rem;
+    background:#fff;border-radius:14px;padding:.5rem;
+    box-shadow:0 24px 48px -16px rgba(1,49,53,.28),0 2px 8px rgba(1,49,53,.08);
+    border:1px solid rgba(1,49,53,.06);
+    opacity:0;visibility:hidden;pointer-events:none;
+    transition:opacity .26s var(--gi-ease),transform .26s var(--gi-ease),visibility .26s;
+  }
+  .nav-dropdown:hover .dropdown-navigation.w-dropdown-list{
+    opacity:1;visibility:visible;pointer-events:auto;transform:translate(-50%,0);
+  }
+}
+
+/* dropdown links */
+.dropdown_links{
+  display:block;font-family:var(--_typeface---body-text-dm-sans,'DM Sans',sans-serif);
+  font-size:.9rem;font-weight:500;color:var(--gi-teal-dark) !important;
+  padding:.6rem .85rem !important;border-radius:9px;white-space:nowrap;
+  transition:background-color .2s var(--gi-ease),color .2s var(--gi-ease),padding-left .2s var(--gi-ease);
+}
+.dropdown_links:hover{background:var(--gi-off-white);color:var(--gi-orange) !important;padding-left:1.05rem !important;}
+.dropdown_links.w--current{background:var(--gi-off-white);color:var(--gi-orange) !important;}
+
+/* CTA pill */
+.button.is-nav_btn{
+  background:var(--gi-orange) !important;color:#fff !important;
+  border-radius:999px !important;padding:.62rem 1.25rem !important;
+  font-family:var(--_typeface---body-text-dm-sans,'DM Sans',sans-serif);
+  font-size:.9rem;font-weight:600;letter-spacing:.01em;
+  box-shadow:0 8px 22px -10px rgba(220,77,47,.7);
+  transition:transform .25s var(--gi-ease),box-shadow .25s var(--gi-ease),background-color .25s var(--gi-ease);
+}
+.button.is-nav_btn:hover{
+  background:var(--gi-orange-light) !important;transform:translateY(-1px);
+  box-shadow:0 12px 28px -10px rgba(220,77,47,.8);
+}
+.button.is-nav_btn .button-icon{transition:transform .25s var(--gi-ease);}
+.button.is-nav_btn:hover .button-icon{transform:translateX(3px);}
+
+/* keyboard focus polish */
+a:focus-visible,button:focus-visible,[tabindex]:focus-visible{
+  outline:2px solid var(--gi-orange-light);outline-offset:3px;border-radius:4px;
+}
