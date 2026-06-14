@@ -466,3 +466,35 @@ html{scroll-padding-top:6rem;}
 .nav-dropdown-toggle:focus-visible{outline:2px solid var(--gi-orange-light);outline-offset:3px;border-radius:8px;}
 .gi-sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
   clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+
+/* ============================================================
+   GLITCH FIXES
+   ============================================================ */
+/* 1) disable the auto-opening newsletter popup */
+.popup_section{display:none !important;}
+
+/* 2) header was occasionally "stuck" mid-screen: a transformed ancestor turns
+   position:fixed into position:absolute. Forbid transforms on the wrapper. */
+.page-wrapper{transform:none !important;}
+
+/* 3) Book ("buy the grit factor") must always be visible — no JS-gated reveal.
+   Keep only the gentle continuous float. */
+.home-book-image-wrapper.gi-book-fly{
+  opacity:1 !important;
+  animation:gi-book-float 11s linear infinite !important;
+}
+
+/* 4) Dropdowns closed when moving the cursor down across the gap. Bridge it so
+   hovering Speaking lets you slide straight down onto the items and click. */
+@media screen and (min-width:992px){
+  .nav-dropdown .dropdown-navigation.w-dropdown-list{margin-top:0 !important;}
+  .nav-dropdown:hover::after{
+    content:"";position:absolute;left:50%;transform:translateX(-50%);
+    top:100%;width:270px;height:1.6rem;
+  }
+}
+
+/* 5) "Check Availability" (contact) page: a distinct, premium background */
+.contact_section{
+  background:radial-gradient(120% 90% at 82% 0%, #e8f0f3 0%, #f3f6f7 45%, #eef3f5 100%) !important;
+}

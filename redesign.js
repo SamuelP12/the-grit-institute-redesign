@@ -187,7 +187,7 @@
     }
   }
 
-  var reveals = [].slice.call(document.querySelectorAll('.reveal, .reveal-stagger, .gi-book-fly'));
+  var reveals = [].slice.call(document.querySelectorAll('.reveal, .reveal-stagger'));
   if (reveals.length) {
     var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (reduce || !('IntersectionObserver' in window)) {
