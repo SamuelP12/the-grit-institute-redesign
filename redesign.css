@@ -264,3 +264,33 @@ h1,h2,h3,.heading-style-h1,.buy-main-title{overflow-wrap:break-word;}
 
 /* shorten the bottom area a little */
 .footer-padding{padding-top:2rem !important;padding-bottom:1.4rem !important;}
+
+/* ============================================================
+   "WOW" LAYER — extra cinematic motion (composes with Webflow IX2)
+   ============================================================ */
+
+/* Hero: continuous, dramatic Ken-Burns drift+zoom on the active slide */
+@keyframes gi-kenburns{
+  0%{transform:scale(1.04) translate(0,0);}
+  100%{transform:scale(1.17) translate(-2%,-2%);}
+}
+.hero-slider .splide__slide.is-active .slider-image{
+  animation:gi-kenburns 9s cubic-bezier(.22,.61,.36,1) forwards !important;
+}
+@media (prefers-reduced-motion:reduce){
+  .hero-slider .splide__slide.is-active .slider-image{animation:none !important;}
+}
+
+/* Primary CTA: light "shine" sweep on hover */
+.button.is-nav_btn,.button.is-icon{position:relative;overflow:hidden;}
+.button.is-nav_btn::after,.button.is-icon::after{
+  content:"";position:absolute;top:0;left:-75%;width:45%;height:100%;pointer-events:none;
+  background:linear-gradient(120deg,transparent,rgba(255,255,255,.38),transparent);
+  transform:skewX(-20deg);transition:left .65s var(--gi-ease);
+}
+.button.is-nav_btn:hover::after,.button.is-icon:hover::after{left:130%;}
+
+/* Cards / CMS items: gentle lift + shadow on hover */
+.w-dyn-item,[class*="card"]{transition:transform .35s var(--gi-ease),box-shadow .35s var(--gi-ease);}
+.w-dyn-item:hover{transform:translateY(-5px);box-shadow:0 26px 50px -26px rgba(16,63,89,.35);}
+
