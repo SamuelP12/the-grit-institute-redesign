@@ -37,6 +37,10 @@
     document.body.insertBefore(skip, document.body.firstChild);
   }
 
+  /* --- footer: keep the copyright year current --- */
+  var yr = new Date().getFullYear();
+  [].slice.call(document.querySelectorAll('.gi-year')).forEach(function (el) { el.textContent = yr; });
+
   /* --- nav: solidify on scroll --- */
   var nav = document.querySelector('.navigation');
   if (nav) {
