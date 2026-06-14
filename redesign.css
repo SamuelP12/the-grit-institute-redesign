@@ -454,3 +454,15 @@ html{scroll-padding-top:6rem;}
 .animated-image.gi-heli-fly.gi-landed{
   animation:gi-heli-hover 4s ease-in-out infinite;
 }
+
+/* ============================================================
+   A11Y: keyboard-operable dropdowns + screen-reader-only utility
+   ============================================================ */
+@media screen and (min-width:992px){
+  .nav-dropdown:focus-within .dropdown-navigation.w-dropdown-list{
+    opacity:1;visibility:visible;pointer-events:auto;transform:translate(-50%,0);
+  }
+}
+.nav-dropdown-toggle:focus-visible{outline:2px solid var(--gi-orange-light);outline-offset:3px;border-radius:8px;}
+.gi-sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
+  clip:rect(0,0,0,0);white-space:nowrap;border:0;}

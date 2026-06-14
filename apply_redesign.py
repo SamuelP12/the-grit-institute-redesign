@@ -110,6 +110,9 @@ def process(path):
     depth = path.count('/')
     p = '../' * depth
     new_ul = build_nav_ul(p, slug, group)
+    # a11y: make dropdown toggles keyboard-operable + screen-reader announced
+    new_ul = re.sub(r'(<div class="nav-dropdown-toggle w-dropdown-toggle[^"]*")>',
+                    r'\1 tabindex="0" role="button" aria-haspopup="true" aria-expanded="false">', new_ul)
     if not UL_RE.search(doc):
         print(f"  !! nav <ul> not found in {path}");
     else:

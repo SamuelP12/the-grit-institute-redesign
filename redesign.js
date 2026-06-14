@@ -37,6 +37,30 @@
     document.body.insertBefore(skip, document.body.firstChild);
   }
 
+  /* --- a11y: keyboard-operable nav dropdowns + announced state --- */
+  [].slice.call(document.querySelectorAll('.nav-dropdown')).forEach(function (dd) {
+    var toggle = dd.querySelector('.nav-dropdown-toggle');
+    if (!toggle) return;
+    var set = function (open) { toggle.setAttribute('aria-expanded', open ? 'true' : 'false'); };
+    dd.addEventListener('focusin', function () { set(true); });
+    dd.addEventListener('focusout', function () { if (!dd.contains(document.activeElement)) set(false); });
+    dd.addEventListener('mouseenter', function () { set(true); });
+    dd.addEventListener('mouseleave', function () { set(false); });
+    toggle.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        var first = dd.querySelector('.dropdown-navigation a');
+        if (first) first.focus();
+      } else if (e.key === 'Escape') {
+        toggle.blur();
+      }
+    });
+    // Escape from within the menu returns focus to the toggle
+    dd.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') { e.preventDefault(); toggle.focus(); toggle.blur(); }
+    });
+  });
+
   /* --- footer: keep the copyright year current --- */
   var yr = new Date().getFullYear();
   [].slice.call(document.querySelectorAll('.gi-year')).forEach(function (el) { el.textContent = yr; });
