@@ -76,12 +76,13 @@
   /* --- floating "Book Shannon" CTA --- */
   var path = location.pathname;
   if (!/\/contact(\/|\/index\.html)?$/.test(path)) {
-    var segs = path.split('/').filter(Boolean);
-    var depth = Math.max(0, segs.length - 1);
-    var prefix = depth ? new Array(depth + 1).join('../') : '';
+    // reuse the nav's Contact link href so it's correct at any deploy path (e.g. GitHub Pages sub-path)
+    var navContact = document.querySelector('.button.is-nav_btn') ||
+                     document.querySelector('a[href$="contact/index.html"]');
+    var contactHref = navContact ? navContact.getAttribute('href') : 'contact/index.html';
     var cta = document.createElement('a');
     cta.className = 'gi-float-cta';
-    cta.href = prefix + 'contact/index.html';
+    cta.href = contactHref;
     cta.setAttribute('aria-label', 'Book Shannon');
     cta.innerHTML = 'Book Shannon<svg viewBox="0 0 20 20" fill="none"><path d="M4.167 10h11.667M12.5 13.333 15.833 10 12.5 6.668" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
     document.body.appendChild(cta);
