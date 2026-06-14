@@ -1,5 +1,31 @@
 /* The Grit Institute — redesign enhancements (tiny, deferred) */
 (function () {
+  /* --- forms: submit to Formspree, inline success (overrides dead Webflow handler) --- */
+  document.addEventListener('submit', function (e) {
+    var form = e.target;
+    if (!form || !form.matches || !form.matches('form[data-gi-form]')) return;
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    var action = form.getAttribute('action') || '';
+    var wrap = form.closest('.w-form') || form.parentNode;
+    var done = wrap && wrap.querySelector('.w-form-done');
+    var fail = wrap && wrap.querySelector('.w-form-fail');
+    var btn = form.querySelector('[type="submit"], input[type="submit"]');
+    if (action.indexOf('YOUR_FORMSPREE_ID') !== -1) {
+      console.warn('[forms] Set your Formspree form ID in the form action to receive submissions.');
+    }
+    if (btn) { btn.dataset.label = btn.value || btn.textContent; if ('value' in btn) btn.value = 'Sending…'; }
+    fetch(action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } })
+      .then(function (r) {
+        if (r.ok) {
+          form.style.display = 'none';
+          if (done) done.style.display = 'block'; else { form.reset(); form.style.display = ''; }
+        } else if (fail) { fail.style.display = 'block'; }
+      })
+      .catch(function () { if (fail) fail.style.display = 'block'; })
+      .finally(function () { if (btn && 'value' in btn && btn.dataset.label) btn.value = btn.dataset.label; });
+  }, true);
+
   /* --- a11y: skip-to-content link --- */
   var main = document.querySelector('main');
   if (main) {
@@ -78,6 +104,32 @@
   [].slice.call(document.querySelectorAll('.sk-final, .sk-dark')).slice(0, 2).forEach(function (s) {
     addCompass(s, 'gi-compass--section');
   });
+
+  /* --- count-up for homepage stat numbers (static text -> animated) --- */
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var stats = [].slice.call(document.querySelectorAll('.counters-number-style'));
+  if (stats.length && 'IntersectionObserver' in window && !reduceMotion) {
+    var countUp = function (el) {
+      var to = parseInt(el.dataset.to, 10) || 0, suf = el.dataset.suffix || '', start = null, dur = 1600;
+      var step = function (ts) {
+        if (!start) start = ts;
+        var p = Math.min((ts - start) / dur, 1), eased = 1 - Math.pow(1 - p, 3);
+        el.textContent = Math.round(eased * to) + suf;
+        if (p < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    };
+    var sObs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) { countUp(e.target); sObs.unobserve(e.target); } });
+    }, { threshold: 0.5 });
+    stats.forEach(function (el) {
+      var txt = (el.textContent || '').trim();
+      el.dataset.to = txt.replace(/[^0-9]/g, '');
+      el.dataset.suffix = txt.replace(/[0-9]/g, '');
+      el.textContent = '0' + el.dataset.suffix;
+      sObs.observe(el);
+    });
+  }
 
   /* --- scroll-reveal engine (replaces Webflow IX2 on upgraded pages) --- */
   var reveals = [].slice.call(document.querySelectorAll('.reveal, .reveal-stagger, .gi-book-fly'));

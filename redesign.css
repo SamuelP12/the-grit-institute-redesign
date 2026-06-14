@@ -394,3 +394,19 @@ html{scroll-padding-top:6rem;}
     transition-duration:.01ms !important;scroll-behavior:auto !important;
   }
 }
+
+/* ============================================================
+   Book/Apache: fly IN like a helicopter banking into frame, then settle
+   (overrides the earlier depth-only entrance). main-wrapper overflow:hidden
+   clips the off-screen approach, so no horizontal scrollbar.
+   ============================================================ */
+@keyframes gi-book-in{
+  0%{opacity:0;transform:translateX(48vw) translateY(-26px) rotateY(-42deg) rotateZ(7deg) scale(.82);}
+  35%{opacity:1;}
+  72%{transform:translateX(0) translateY(-9px) rotateY(12deg) rotateZ(-2deg) scale(1.045);}
+  100%{opacity:1;transform:translateX(0) translateY(0) rotateY(0deg) rotateZ(0deg) scale(1);}
+}
+.home-book-image-wrapper.gi-book-fly.in{
+  animation:gi-book-in 1.9s cubic-bezier(.2,.72,.22,1) forwards,
+            gi-book-float 11s linear 1.9s infinite;
+}
