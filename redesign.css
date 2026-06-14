@@ -256,3 +256,11 @@ h1,h2,h3,.heading-style-h1,.buy-main-title{overflow-wrap:break-word;}
 
 /* slightly slower, silkier Ken-Burns on the hero (smoother "helicopter" cover) */
 .hero-slider .slider-image{transition:transform 10s cubic-bezier(.22,.61,.36,1) !important;}
+
+/* ============================================================
+   HOME: smaller YouTube videos (were 47.5rem wide) + a little breathing room
+   ============================================================ */
+.videos-slider-wrapper{max-width:34rem !important;margin-top:2rem !important;}
+
+/* shorten the bottom area a little */
+.footer-padding{padding-top:2rem !important;padding-bottom:1.4rem !important;}
