@@ -1,11 +1,11 @@
 /* ============================================================
    The Grit Institute — Redesign layer (loaded after Webflow CSS)
    Cleaner · calmer · faster. Overrides defaults only; fully reversible.
-   Brand: dark-teal #013135 · teal #53717e · orange #dc4d2f
+   Brand: dark-teal #103f59 · teal #53717e · orange #dc4d2f
    ============================================================ */
 
 :root{
-  --gi-teal-dark:#013135;
+  --gi-teal-dark:#103f59;
   --gi-teal:#53717e;
   --gi-orange:#dc4d2f;
   --gi-orange-light:#fa7151;
@@ -23,7 +23,7 @@ html{scroll-behavior:smooth;}
    NAVIGATION — frosted, minimal, confident
    ============================================================ */
 .navigation{
-  background-color:rgba(1,49,53,.45) !important;
+  background-color:rgba(16,63,89,.45) !important;
   -webkit-backdrop-filter:saturate(140%) blur(14px);
   backdrop-filter:saturate(140%) blur(14px);
   border-bottom:1px solid rgba(255,255,255,.06);
@@ -31,7 +31,7 @@ html{scroll-behavior:smooth;}
   transition:background-color .4s var(--gi-ease),border-color .4s var(--gi-ease),box-shadow .4s var(--gi-ease);
 }
 .navigation.is-scrolled{
-  background-color:rgba(1,49,53,.94) !important;
+  background-color:rgba(16,63,89,.94) !important;
   border-bottom-color:rgba(255,255,255,.10);
   box-shadow:0 10px 30px -12px rgba(0,0,0,.45);
 }
@@ -85,8 +85,8 @@ html{scroll-behavior:smooth;}
     display:block !important;position:absolute;top:100%;left:50%;
     transform:translate(-50%,8px);min-width:232px;margin-top:.4rem;
     background:#fff;border-radius:14px;padding:.5rem;
-    box-shadow:0 24px 48px -16px rgba(1,49,53,.28),0 2px 8px rgba(1,49,53,.08);
-    border:1px solid rgba(1,49,53,.06);
+    box-shadow:0 24px 48px -16px rgba(16,63,89,.28),0 2px 8px rgba(16,63,89,.08);
+    border:1px solid rgba(16,63,89,.06);
     opacity:0;visibility:hidden;pointer-events:none;
     transition:opacity .26s var(--gi-ease),transform .26s var(--gi-ease),visibility .26s;
   }
@@ -204,3 +204,55 @@ h1,h2,h3,.heading-style-h1,.buy-main-title{overflow-wrap:break-word;}
 @keyframes gi-scroll{0%{opacity:0;transform:translate(-50%,0);}30%{opacity:1;}100%{opacity:0;transform:translate(-50%,12px);}}
 @media (prefers-reduced-motion:reduce){.gi-scroll-cue .mouse::after{animation:none;}}
 @media (max-width:767px){.gi-scroll-cue{display:none;}}
+
+/* ============================================================
+   SCROLL-REVEAL SYSTEM (site-wide; powers the homepage motion upgrade)
+   ============================================================ */
+.reveal{opacity:0;transform:translateY(28px);
+  transition:opacity .85s var(--gi-ease),transform .85s var(--gi-ease);will-change:opacity,transform;}
+.reveal.in{opacity:1;transform:none;}
+.reveal-stagger>*{opacity:0;transform:translateY(22px);
+  transition:opacity .7s var(--gi-ease),transform .7s var(--gi-ease);}
+.reveal-stagger.in>*{opacity:1;transform:none;}
+.reveal-stagger.in>*:nth-child(2){transition-delay:.07s;}
+.reveal-stagger.in>*:nth-child(3){transition-delay:.14s;}
+.reveal-stagger.in>*:nth-child(4){transition-delay:.21s;}
+.reveal-stagger.in>*:nth-child(5){transition-delay:.28s;}
+.reveal-stagger.in>*:nth-child(6){transition-delay:.35s;}
+@media (prefers-reduced-motion:reduce){
+  .reveal,.reveal-stagger>*{opacity:1!important;transform:none!important;transition:none!important;}
+}
+
+/* ============================================================
+   LAKE-BLUE RECOLOR — override Webflow's brand variable site-wide
+   ============================================================ */
+:root{
+  --_colors---swatches-brand--dark-teal:#103f59 !important;  /* was #013135 teal -> lake blue */
+}
+
+/* ============================================================
+   REMOVE the "Made in Webflow" badge (bottom-right)
+   ============================================================ */
+.w-webflow-badge{display:none !important;}
+
+/* ============================================================
+   HERO IMAGE FIT — show her head (was object-position 70% 50%,
+   centering on the torso and clipping the head)
+   ============================================================ */
+.hero-slider .slider-image,.slider-image{object-position:50% 24% !important;}
+
+/* ============================================================
+   COMPASS MOTIF — slow-rotating accent (injected by redesign.js)
+   ============================================================ */
+.gi-compass{position:absolute;pointer-events:none;z-index:0;display:block;
+  animation:gi-rotate 120s linear infinite;}
+.gi-compass svg{display:block;width:100%;height:100%;}
+@keyframes gi-rotate{to{transform:rotate(360deg);}}
+.gi-compass--footer{width:min(34vw,380px);aspect-ratio:1;right:2%;top:50%;
+  transform-origin:center;margin-top:-19vw;opacity:.07;color:#fff;}
+.gi-compass--section{width:min(38vw,420px);aspect-ratio:1;right:-5%;bottom:-12%;opacity:.09;color:var(--gi-orange-light);}
+@media (prefers-reduced-motion:reduce){.gi-compass{animation:none;}}
+@media (max-width:767px){.gi-compass--footer{opacity:.05;}}
+
+/* slightly slower, silkier Ken-Burns on the hero (smoother "helicopter" cover) */
+.hero-slider .slider-image{transition:transform 10s cubic-bezier(.22,.61,.36,1) !important;}
