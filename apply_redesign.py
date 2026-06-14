@@ -10,7 +10,7 @@ ARROW = ('<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 20 2
 
 # slug -> (group, label-in-dropdown). Groups: about, speaking, courses, books, insights, contact
 GROUP = {
-    'about':'about','speaking':'speaking',
+    'about':'about','speaking':'speaking','speaker-kit':'speaking',
     'courses':'courses','transcend-mastermind':'courses','offerings-for-schools':'courses','powrpack':'courses',
     'the-grit-factor':'books','other-books-writing':'books',
     'podcast':'insights','blog':'insights','media':'insights',
@@ -32,13 +32,20 @@ def dd_cur(active_slug, slug):  # active class for dropdown child link
 
 def build_nav_ul(p, slug, group):
     """p = relative prefix (e.g. '', '../', '../../')."""
+    active_speaking = ' gi-active' if group == 'speaking' else ''
     active_courses = ' gi-active' if group == 'courses' else ''
     active_books   = ' gi-active' if group == 'books' else ''
     active_ins     = ' gi-active' if group == 'insights' else ''
     return (
       '<ul role="list" class="nav-menu_list-centered w-list-unstyled">'
       f'<li class="nav-menu_list-item"><a href="{p}about/index.html" class="nav_link w-inline-block{cur(group=="about")}"><div>About</div></a></li>'
-      f'<li class="nav-menu_list-item"><a href="{p}speaking/index.html" class="nav_link w-inline-block{cur(group=="speaking")}"><div>Speaking</div></a></li>'
+      # Speaking dropdown
+      f'<li class="nav-menu_list-item"><div data-hover="true" data-delay="0" data-w-id="gi-dd-speaking" class="nav-dropdown w-dropdown">'
+      f'<div class="nav-dropdown-toggle w-dropdown-toggle{active_speaking}"><div>Speaking</div><div class="dropdown-icon w-icon-dropdown-toggle"></div></div>'
+      '<nav class="dropdown-navigation w-dropdown-list">'
+      f'<a href="{p}speaking/index.html" class="dropdown_links w-dropdown-link{dd_cur(slug,"speaking")}">Speaking Overview</a>'
+      f'<a href="{p}speaker-kit/index.html" class="dropdown_links margin-remove w-dropdown-link{dd_cur(slug,"speaker-kit")}">Speaker Kit</a>'
+      '</nav></div></li>'
       # Courses dropdown
       f'<li class="nav-menu_list-item"><div data-hover="true" data-delay="0" data-w-id="gi-dd-courses" class="nav-dropdown w-dropdown">'
       f'<div class="nav-dropdown-toggle w-dropdown-toggle{active_courses}"><div>Courses</div><div class="dropdown-icon w-icon-dropdown-toggle"></div></div>'
