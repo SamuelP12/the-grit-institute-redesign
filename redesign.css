@@ -448,3 +448,9 @@ html{scroll-padding-top:6rem;}
   animation:gi-heli-in 1.9s cubic-bezier(.2,.72,.22,1) forwards,
             gi-heli-hover 4s ease-in-out 1.9s infinite;
 }
+
+/* Apache: hover bob only once it has "landed" (JS toggles .gi-landed after the
+   scroll-linked fly-in completes). The scroll-linked transform is set inline by JS. */
+.animated-image.gi-heli-fly.gi-landed{
+  animation:gi-heli-hover 4s ease-in-out infinite;
+}

@@ -132,7 +132,33 @@
   }
 
   /* --- scroll-reveal engine (replaces Webflow IX2 on upgraded pages) --- */
-  var reveals = [].slice.call(document.querySelectorAll('.reveal, .reveal-stagger, .gi-book-fly, .gi-heli-fly'));
+  /* --- Apache: scroll-LINKED fly-in (progresses as you scroll), then hover --- */
+  var heli = document.querySelector('.gi-heli-fly');
+  if (heli) {
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      heli.style.opacity = '1';
+    } else {
+      var heliLanded = false, heliTick = false;
+      var updateHeli = function () {
+        var r = heli.getBoundingClientRect(), vh = window.innerHeight || 800;
+        var p = Math.max(0, Math.min(1, (vh - r.top) / (vh * 0.62)));  // 0=entering bottom, 1=landed
+        if (p >= 1) {
+          if (!heliLanded) { heliLanded = true; heli.style.transform = ''; heli.style.opacity = '1'; heli.classList.add('gi-landed'); }
+        } else {
+          if (heliLanded) { heliLanded = false; heli.classList.remove('gi-landed'); }
+          heli.style.opacity = Math.min(1, p * 1.6);
+          heli.style.transform = 'translateY(' + ((1 - p) * 150).toFixed(1) + 'px) scale(' + (0.62 + p * 0.38).toFixed(3) + ')';
+        }
+        heliTick = false;
+      };
+      var onHeliScroll = function () { if (!heliTick) { heliTick = true; requestAnimationFrame(updateHeli); } };
+      updateHeli();
+      window.addEventListener('scroll', onHeliScroll, { passive: true });
+      window.addEventListener('resize', onHeliScroll, { passive: true });
+    }
+  }
+
+  var reveals = [].slice.call(document.querySelectorAll('.reveal, .reveal-stagger, .gi-book-fly'));
   if (reveals.length) {
     var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (reduce || !('IntersectionObserver' in window)) {
