@@ -498,3 +498,6 @@ html{scroll-padding-top:6rem;}
 .contact_section{
   background:radial-gradient(120% 90% at 82% 0%, #e8f0f3 0%, #f3f6f7 45%, #eef3f5 100%) !important;
 }
+
+/* Speaking page: the teaching reel was full-width. Constrain it to a tidy size. */
+.huffman-video-wrapper{max-width:760px !important;margin-left:auto !important;margin-right:auto !important;}

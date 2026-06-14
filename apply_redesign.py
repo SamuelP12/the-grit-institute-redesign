@@ -45,11 +45,7 @@ def build_nav_ul(p, slug, group):
       f'<div class="nav-dropdown-toggle w-dropdown-toggle{active_speaking}"><div>Speaking</div><div class="dropdown-icon w-icon-dropdown-toggle"></div></div>'
       '<nav class="dropdown-navigation w-dropdown-list">'
       f'<a href="{p}speaking/index.html" class="dropdown_links w-dropdown-link{dd_cur(slug,"speaking")}">Speaking Overview</a>'
-      f'<a href="{p}speaker-kit/index.html" class="dropdown_links w-dropdown-link{dd_cur(slug,"speaker-kit")}">Speaker Kit</a>'
-      f'<a href="{p}keynotes/decision-making-under-pressure/index.html" class="dropdown_links w-dropdown-link{dd_cur(slug,"decision-making-under-pressure")}">Decision Under Pressure</a>'
-      f'<a href="{p}keynotes/the-grit-factor/index.html" class="dropdown_links w-dropdown-link{dd_cur(slug,"the-grit-factor")}">The Grit Factor (Resilience)</a>'
-      f'<a href="{p}keynotes/courageous-leadership/index.html" class="dropdown_links w-dropdown-link{dd_cur(slug,"courageous-leadership")}">Courageous Leadership</a>'
-      f'<a href="{p}keynotes/women-leading-under-pressure/index.html" class="dropdown_links margin-remove w-dropdown-link{dd_cur(slug,"women-leading-under-pressure")}">Women in Leadership</a>'
+      f'<a href="{p}speaker-kit/index.html" class="dropdown_links margin-remove w-dropdown-link{dd_cur(slug,"speaker-kit")}">Speaker Kit</a>'
       '</nav></div></li>'
       # Courses dropdown
       f'<li class="nav-menu_list-item"><div data-hover="true" data-delay="0" data-w-id="gi-dd-courses" class="nav-dropdown w-dropdown">'
