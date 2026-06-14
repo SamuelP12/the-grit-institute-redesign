@@ -125,3 +125,48 @@ html{scroll-behavior:smooth;}
 a:focus-visible,button:focus-visible,[tabindex]:focus-visible{
   outline:2px solid var(--gi-orange-light);outline-offset:3px;border-radius:4px;
 }
+
+/* ============================================================
+   SPACING & FIT FIXES
+   ============================================================ */
+/* "Buy The Book" eyebrow was overlapping the giant THE GRIT FACTOR title
+   (the container had margin-bottom:-3.6rem pulling them together) */
+.buy-title{margin-bottom:-.5rem !important;}
+.buy-heading-style{margin-bottom:.2em !important;}
+/* never let long words/headings overflow horizontally on small screens */
+h1,h2,h3,.heading-style-h1,.buy-main-title{overflow-wrap:break-word;}
+@media (max-width:767px){
+  .buy-main-title{font-size:clamp(3rem,17vw,8rem) !important;}
+}
+
+/* ============================================================
+   GLOBAL PREMIUM MICRO-INTERACTIONS (hover-based; no IX2 conflict)
+   ============================================================ */
+.button{transition:transform .25s var(--gi-ease),box-shadow .25s var(--gi-ease),
+  background-color .25s var(--gi-ease),color .25s var(--gi-ease),filter .25s var(--gi-ease) !important;}
+.button:not(.is-nav_btn):hover{transform:translateY(-2px);filter:saturate(1.05);}
+.button .button-icon{transition:transform .25s var(--gi-ease);}
+.button:hover .button-icon{transform:translateX(4px);}
+
+/* ============================================================
+   FLOATING "BOOK SHANNON" CTA (injected by redesign.js) — drives bookings
+   ============================================================ */
+.gi-float-cta{
+  position:fixed;right:1.5rem;bottom:1.5rem;z-index:980;
+  display:inline-flex;align-items:center;gap:.5rem;
+  font-family:var(--_typeface---body-text-dm-sans,'DM Sans',sans-serif);font-size:.92rem;font-weight:600;
+  color:#fff;background:var(--gi-orange);text-decoration:none;
+  padding:.85rem 1.35rem;border-radius:999px;
+  box-shadow:0 14px 34px -10px rgba(220,77,47,.75);
+  transform:translateY(140%);opacity:0;pointer-events:none;
+  transition:transform .5s var(--gi-ease),opacity .5s var(--gi-ease),background-color .25s var(--gi-ease);
+}
+.gi-float-cta.show{transform:translateY(0);opacity:1;pointer-events:auto;}
+.gi-float-cta:hover{background:var(--gi-orange-light);transform:translateY(-3px);}
+.gi-float-cta svg{width:1.05em;height:1.05em;transition:transform .25s var(--gi-ease);}
+.gi-float-cta:hover svg{transform:translateX(4px);}
+.gi-float-cta::before{content:"";position:absolute;inset:0;border-radius:999px;
+  box-shadow:0 0 0 0 rgba(220,77,47,.55);animation:gi-pulse 2.6s var(--gi-ease) infinite;}
+@keyframes gi-pulse{0%{box-shadow:0 0 0 0 rgba(220,77,47,.5);}70%{box-shadow:0 0 0 14px rgba(220,77,47,0);}100%{box-shadow:0 0 0 0 rgba(220,77,47,0);}}
+@media (max-width:560px){.gi-float-cta{right:1rem;bottom:1rem;padding:.7rem 1.1rem;font-size:.85rem;}}
+@media (prefers-reduced-motion:reduce){.gi-float-cta::before{animation:none;}}
