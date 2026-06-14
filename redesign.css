@@ -170,3 +170,37 @@ h1,h2,h3,.heading-style-h1,.buy-main-title{overflow-wrap:break-word;}
 @keyframes gi-pulse{0%{box-shadow:0 0 0 0 rgba(220,77,47,.5);}70%{box-shadow:0 0 0 14px rgba(220,77,47,0);}100%{box-shadow:0 0 0 0 rgba(220,77,47,0);}}
 @media (max-width:560px){.gi-float-cta{right:1rem;bottom:1rem;padding:.7rem 1.1rem;font-size:.85rem;}}
 @media (prefers-reduced-motion:reduce){.gi-float-cta::before{animation:none;}}
+
+/* ============================================================
+   CINEMATIC HERO — slow Ken-Burns zoom + smooth crossfade
+   (paired with slower Splide pacing: 6.5s interval, 1.5s fade)
+   ============================================================ */
+.hero-slider .splide__slide{overflow:hidden;}
+.hero-slider .slider-image{
+  will-change:transform;transform-origin:center;transform:scale(1.02);
+  transition:transform 8s cubic-bezier(.22,.61,.36,1);
+}
+.hero-slider .splide__slide.is-active .slider-image{transform:scale(1.12);}
+.hero-slider .splide__slide.is-active:nth-child(even) .slider-image{transform:scale(1.12) translate(-1.5%, -1%);}
+@media (prefers-reduced-motion:reduce){
+  .hero-slider .slider-image,
+  .hero-slider .splide__slide.is-active .slider-image{transform:none;transition:none;}
+}
+
+/* ============================================================
+   HERO SCROLL CUE (injected by redesign.js on the homepage)
+   ============================================================ */
+.gi-scroll-cue{
+  position:absolute;left:50%;bottom:2rem;transform:translateX(-50%);z-index:5;
+  display:flex;flex-direction:column;align-items:center;gap:.5rem;
+  background:none;border:0;cursor:pointer;color:rgba(255,255,255,.82);
+  font-family:'DM Sans',sans-serif;font-size:.66rem;letter-spacing:.28em;text-transform:uppercase;
+  transition:color .3s var(--gi-ease),opacity .4s var(--gi-ease);
+}
+.gi-scroll-cue:hover{color:#fff;}
+.gi-scroll-cue .mouse{width:24px;height:38px;border:1.6px solid rgba(255,255,255,.6);border-radius:14px;position:relative;}
+.gi-scroll-cue .mouse::after{content:"";position:absolute;left:50%;top:7px;width:3px;height:7px;border-radius:3px;
+  background:var(--gi-orange-light);transform:translateX(-50%);animation:gi-scroll 1.8s var(--gi-ease) infinite;}
+@keyframes gi-scroll{0%{opacity:0;transform:translate(-50%,0);}30%{opacity:1;}100%{opacity:0;transform:translate(-50%,12px);}}
+@media (prefers-reduced-motion:reduce){.gi-scroll-cue .mouse::after{animation:none;}}
+@media (max-width:767px){.gi-scroll-cue{display:none;}}

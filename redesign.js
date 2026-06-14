@@ -35,4 +35,24 @@
     toggleCta();
     window.addEventListener('scroll', toggleCta, { passive: true });
   }
+
+  /* --- hero scroll cue (homepage only) --- */
+  var hero = document.querySelector('.hero_section');
+  if (hero) {
+    if (getComputedStyle(hero).position === 'static') hero.style.position = 'relative';
+    var cue = document.createElement('button');
+    cue.type = 'button';
+    cue.className = 'gi-scroll-cue';
+    cue.setAttribute('aria-label', 'Scroll down');
+    cue.innerHTML = '<span class="mouse"></span><span>Scroll</span>';
+    cue.addEventListener('click', function () {
+      var y = hero.getBoundingClientRect().bottom + window.scrollY - 80;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    });
+    hero.appendChild(cue);
+    // fade the cue out once the user starts scrolling
+    window.addEventListener('scroll', function () {
+      cue.style.opacity = window.scrollY > 160 ? '0' : '1';
+    }, { passive: true });
+  }
 })();
