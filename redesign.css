@@ -433,3 +433,18 @@ html{scroll-padding-top:6rem;}
   .animated-image.gi-heli-fly,.animated-image.gi-heli-fly.in{
     animation:none !important;opacity:1 !important;transform:none !important;}
 }
+
+/* Apache: make the fly-in + hover slightly more apparent (overrides above) */
+@keyframes gi-heli-in{
+  0%{opacity:0;transform:translateY(150px) scale(.62);}
+  55%{opacity:1;}
+  100%{opacity:1;transform:translateY(0) scale(1);}
+}
+@keyframes gi-heli-hover{
+  0%,100%{transform:translateY(0) rotate(0deg);}
+  50%{transform:translateY(-18px) rotate(-1deg);}
+}
+.animated-image.gi-heli-fly.in{
+  animation:gi-heli-in 1.9s cubic-bezier(.2,.72,.22,1) forwards,
+            gi-heli-hover 4s ease-in-out 1.9s infinite;
+}
