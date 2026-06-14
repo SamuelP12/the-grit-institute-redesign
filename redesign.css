@@ -355,3 +355,25 @@ html body .videos-slider-wrapper{
 .gi-compass--footer{
   width:min(22vw,260px);right:-3%;bottom:-8%;top:auto;margin:0;opacity:.05;
 }
+
+/* ============================================================
+   Book "helicopter": continuous orbital float (never stops at the extremes)
+   ============================================================ */
+@keyframes gi-book-float{
+  0%,100%{transform:rotateY(0deg) translateY(0);}
+  20%{transform:rotateY(-6deg) translateY(-3px);}
+  50%{transform:rotateY(0deg) translateY(-7px);}
+  80%{transform:rotateY(6deg) translateY(-3px);}
+}
+.home-book-image-wrapper.gi-book-fly.in{
+  animation:gi-book-in 1.5s cubic-bezier(.2,.7,.25,1) forwards,
+            gi-book-float 11s linear 1.5s infinite;
+}
+
+/* ============================================================
+   FOOTER: smaller + remove the Navigation column (made it too long)
+   ============================================================ */
+.footer-item_grid-item:first-child{display:none !important;}   /* the Navigation list */
+.footer-padding{padding-top:1.6rem !important;padding-bottom:1rem !important;}
+.footer_flex{gap:2rem !important;}
+.footer-bottom_flex{padding-top:1rem !important;margin-top:1rem !important;}
