@@ -294,3 +294,34 @@ h1,h2,h3,.heading-style-h1,.buy-main-title{overflow-wrap:break-word;}
 .w-dyn-item,[class*="card"]{transition:transform .35s var(--gi-ease),box-shadow .35s var(--gi-ease);}
 .w-dyn-item:hover{transform:translateY(-5px);box-shadow:0 26px 50px -26px rgba(16,63,89,.35);}
 
+
+/* ============================================================
+   FIXES round 2 (video size, blue consistency, CTA height, hero)
+   ============================================================ */
+
+/* YouTube videos: force ~35% smaller (max specificity to beat any cascade) */
+html body .videos-slider-wrapper{
+  width:30rem !important;max-width:30rem !important;
+  margin-left:auto !important;margin-right:auto !important;
+}
+
+/* CONSISTENT BLUE: harmonize the medium "teal" (#53717e slate, used on the
+   footer + review/section backgrounds) to a lake-blue of the same hue as the
+   dark lake blue, so every blue on the site matches */
+:root{ --_colors---swatches-brand--teal:#356b88 !important; }
+
+/* Compact the newsletter / final CTA band (was 9.06rem / 7.75rem padding) */
+.cta-padding{padding-top:4rem !important;padding-bottom:3.5rem !important;}
+
+/* HERO: cooler, silkier cinematic Ken-Burns (overrides the earlier 9s version) */
+@keyframes gi-kenburns{
+  0%{transform:scale(1.05) translate(0,0);}
+  100%{transform:scale(1.19) translate(-2.4%,-2.6%);}
+}
+.hero-slider .splide__slide.is-active .slider-image{
+  animation:gi-kenburns 14s cubic-bezier(.16,.5,.28,1) forwards !important;
+}
+
+/* Book image was in a square container with object-fit:cover -> cropped the
+   top/bottom of the portrait cover. Show the whole book. */
+.home-book-image-wrapper{object-fit:contain !important;}
