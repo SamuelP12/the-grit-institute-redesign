@@ -69,7 +69,7 @@
   });
 
   /* --- scroll-reveal engine (replaces Webflow IX2 on upgraded pages) --- */
-  var reveals = [].slice.call(document.querySelectorAll('.reveal, .reveal-stagger'));
+  var reveals = [].slice.call(document.querySelectorAll('.reveal, .reveal-stagger, .gi-book-fly'));
   if (reveals.length) {
     var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (reduce || !('IntersectionObserver' in window)) {
