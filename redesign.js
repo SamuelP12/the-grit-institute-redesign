@@ -1,5 +1,16 @@
 /* The Grit Institute — redesign enhancements (tiny, deferred) */
 (function () {
+  /* --- a11y: skip-to-content link --- */
+  var main = document.querySelector('main');
+  if (main) {
+    if (!main.id) main.id = 'gi-main';
+    var skip = document.createElement('a');
+    skip.className = 'gi-skip';
+    skip.href = '#' + main.id;
+    skip.textContent = 'Skip to content';
+    document.body.insertBefore(skip, document.body.firstChild);
+  }
+
   /* --- nav: solidify on scroll --- */
   var nav = document.querySelector('.navigation');
   if (nav) {
