@@ -410,3 +410,26 @@ html{scroll-padding-top:6rem;}
   animation:gi-book-in 1.9s cubic-bezier(.2,.72,.22,1) forwards,
             gi-book-float 11s linear 1.9s infinite;
 }
+
+/* ============================================================
+   APACHE HELICOPTER (.animated-image): flies in (approach + rise), settles,
+   then hovers with a gentle bob. Replaces Webflow's side-to-side twist.
+   ============================================================ */
+@keyframes gi-heli-in{
+  0%{opacity:0;transform:translateY(90px) scale(.76);}
+  60%{opacity:1;}
+  100%{opacity:1;transform:translateY(0) scale(1);}
+}
+@keyframes gi-heli-hover{
+  0%,100%{transform:translateY(0) rotate(0deg);}
+  50%{transform:translateY(-11px) rotate(-.6deg);}
+}
+.animated-image.gi-heli-fly{opacity:0;will-change:transform,opacity;}
+.animated-image.gi-heli-fly.in{
+  animation:gi-heli-in 1.7s cubic-bezier(.2,.7,.25,1) forwards,
+            gi-heli-hover 4.5s ease-in-out 1.7s infinite;
+}
+@media (prefers-reduced-motion:reduce){
+  .animated-image.gi-heli-fly,.animated-image.gi-heli-fly.in{
+    animation:none !important;opacity:1 !important;transform:none !important;}
+}
