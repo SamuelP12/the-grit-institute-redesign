@@ -15,9 +15,9 @@ SAMEAS = [
 # ---- per-page title + meta description (hand-written, keyword-led) ----
 META = {
  "index.html": ("Women's Leadership Keynote Speaker | Shannon Huffman Polson",
-   "Shannon Huffman Polson—one of the first women to fly the Apache in combat—delivers keynotes on courageous leadership, resilience, and decision-making under pressure."),
+   "Shannon Huffman Polson—one of the first women to fly the Apache helicopter—delivers keynotes on courageous leadership, resilience, and decision-making under pressure."),
  "about/index.html": ("About Shannon Huffman Polson — Apache Pilot, Author & Speaker",
-   "From Apache attack helicopter pilot to bestselling author and leadership educator—meet Shannon Huffman Polson and the story behind The Grit Institute."),
+   "From Apache helicopter pilot to author and leadership educator—meet Shannon Huffman Polson and the story behind The Grit Institute."),
  "speaking/index.html": ("Leadership Keynote Speaker | Book Shannon Huffman Polson",
    "Book Shannon Huffman Polson, Apache pilot and author of The Grit Factor, for keynotes on courageous leadership, resilience, and high-performance teams. Check availability."),
  "courses/index.html": ("Leadership Development Courses & Training | The Grit Institute",
@@ -80,7 +80,7 @@ GRAPH = {
     {"@type": "Person", "@id": SITE_URL + "/#shannon",
      "name": "Shannon Huffman Polson",
      "jobTitle": ["Keynote Speaker", "Author", "Leadership Educator"],
-     "description": "One of the first women to fly the Apache attack helicopter in combat; keynote speaker, corporate trainer, professor, and bestselling author of The Grit Factor.",
+     "description": "One of the first women to fly the Apache helicopter in the U.S. Army; keynote speaker and author of The Grit Factor.",
      "url": SITE_URL + "/", "image": LOGO, "sameAs": SAMEAS,
      "knowsAbout": ["Leadership", "Resilience", "Grit", "Decision-making under pressure",
                     "Women in leadership", "Military leadership", "High-performance teams", "Courageous leadership"],
@@ -144,11 +144,11 @@ def hero():
     p = "index.html"; d = open(p, encoding="utf-8").read()
     reps = [
       ("Science, story, and strategy for courageous leadership.",
-       "Apache pilot · Author of <em>The Grit Factor</em> · Leadership professor"),
+       "Apache pilot · Author of <em>The Grit Factor</em> · Founder, The Grit Institute"),
       ('Lead with Purpose.<span class="text-style-larger"> Live with Grit</span>',
        'Lead Like Lives<span class="text-style-larger"> Depend On It.</span>'),
       ("The Grit Institute helps leaders and organizations build purpose, resilience, and meaning—so they can thrive through challenge and change.",
-       "One of the first women to fly the Apache attack helicopter in combat, Shannon Huffman Polson teaches leaders to decide under pressure, build teams that perform in the hardest conditions, and lead with grit when it counts."),
+       "One of the first women to fly the Apache helicopter, Shannon Huffman Polson teaches leaders to decide under pressure, build teams that perform in the hardest conditions, and lead with grit when it counts."),
       ('<a href="contact/index.html" class="button is-icon is-medium w-inline-block"><div>Book a call with shannon</div>',
        '<a href="speaking/index.html" class="button is-icon is-medium w-inline-block"><div>Book Shannon to Speak</div>'),
     ]
