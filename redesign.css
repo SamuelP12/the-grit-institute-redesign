@@ -478,8 +478,13 @@ html{scroll-padding-top:6rem;}
 .page-wrapper{transform:none !important;}
 
 /* 3) Book ("buy the grit factor") must always be visible — no JS-gated reveal.
-   Keep only the gentle continuous float. */
+   Keep only the gentle continuous float.
+   3b) It was invisible in the buy section: with left auto/width 23rem/right -2.5rem
+   on an absolutely-positioned img, Chrome resolves max-width:100% (global img reset)
+   against 0 here and clips width to 0 (height is unaffected). Drop max-width so the
+   explicit width wins. */
 .home-book-image-wrapper.gi-book-fly{
+  max-width:none !important;
   opacity:1 !important;
   animation:gi-book-float 11s linear infinite !important;
 }
